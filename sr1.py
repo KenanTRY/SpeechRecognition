@@ -124,7 +124,7 @@ with sr.AudioFile(file_path) as source:
     try:
         text = recognizer.recognize_google(audio, language=lang)
 
-        text_file = open("transcribed.doc", "w") # this part creates a doc file in which transcribed text is written 
+        text_file = open("transcribed.doc", "w") #this part creates a doc file in which transcribed text is written 
         n = text_file.write(text)
         text_file.close()
     except:
