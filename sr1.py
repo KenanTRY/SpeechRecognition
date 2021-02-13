@@ -7,6 +7,7 @@ from tkinter import filedialog
 from os import path
 
 input('Please press enter to list langages available\nWarning not all languages are transcribed perfectly!!!')
+#In this part we are going to list languages that are supported by Google Speech Recognition
 
 print('Afrikaans (South Africa)	af-ZA')
 print('Albanian (Albania)		sq-AL')
@@ -105,7 +106,7 @@ print('Vietnamese (Vietnam)		vi-VN')
 print('Zulu (South Africa)		zu-ZA')
 lang = input('Please enter language you want to transcribe(For example az-AZ):')
 
-
+#opening a dialog to choose a file
 root = tk.Tk()
 root.withdraw()
 
@@ -116,16 +117,18 @@ print('The file you have seleted is located at' + file_path)
 recognizer = sr.Recognizer()
 recognizer.energy_threshold = 300
 
+#this is where magic starts
 with sr.AudioFile(file_path) as source:
     audio = recognizer.listen(source)
     print('Working on it, wait a minute please...')
     try:
         text = recognizer.recognize_google(audio, language=lang)
-        text_file = open("transcribed.doc", "w")
+
+        text_file = open("transcribed.doc", "w") # this part creates a doc file in which transcribed text is written 
         n = text_file.write(text)
         text_file.close()
     except:
-        print('Sorry, something went wrong...')
+        print('Sorry, something went wrong...') #if speech is not recognizable it will throw this exception preventing program get into traceback
 
 
 
